@@ -1,0 +1,148 @@
+type Drips_AccountMetadataEmitted {
+  id: ID!
+  accountId: BigInt!
+  key: String!
+  value: String!
+}
+
+type Drips_AdminChanged {
+  id: ID!
+  previousAdmin: String!
+  newAdmin: String!
+}
+
+type Drips_BeaconUpgraded {
+  id: ID!
+  beacon: String!
+}
+
+type Drips_Collectable {
+  id: ID!
+  accountId: BigInt!
+  erc20: String!
+  amt: BigInt!
+}
+
+type Drips_Collected {
+  id: ID!
+  accountId: BigInt!
+  erc20: String!
+  collected: BigInt!
+}
+
+type Drips_DriverAddressUpdated {
+  id: ID!
+  driverId: BigInt!
+  oldDriverAddr: String!
+  newDriverAddr: String!
+}
+
+type Drips_DriverRegistered {
+  id: ID!
+  driverId: BigInt!
+  driverAddr: String!
+}
+
+type Drips_Given {
+  id: ID!
+  accountId: BigInt!
+  receiver: BigInt!
+  erc20: String!
+  amt: BigInt!
+}
+
+type Drips_NewAdminProposed {
+  id: ID!
+  currentAdmin: String!
+  newAdmin: String!
+}
+
+type Drips_Paused {
+  id: ID!
+  pauser: String!
+}
+
+type Drips_PauserGranted {
+  id: ID!
+  pauser: String!
+  admin: String!
+}
+
+type Drips_PauserRevoked {
+  id: ID!
+  pauser: String!
+  admin: String!
+}
+
+type Drips_ReceivedStreams {
+  id: ID!
+  accountId: BigInt!
+  erc20: String!
+  amt: BigInt!
+  receivableCycles: BigInt!
+}
+
+type Drips_Split {
+  id: ID!
+  accountId: BigInt!
+  receiver: BigInt!
+  erc20: String!
+  amt: BigInt!
+}
+
+type Drips_SplitsReceiverSeen {
+  id: ID!
+  receiversHash: String!
+  accountId: BigInt!
+  weight: BigInt!
+}
+
+type Drips_SplitsSet {
+  id: ID!
+  accountId: BigInt!
+  receiversHash: String!
+}
+
+type Drips_SqueezedStreams {
+  id: ID!
+  accountId: BigInt!
+  erc20: String!
+  senderId: BigInt!
+  amt: BigInt!
+  streamsHistoryHashes: [String!]!
+}
+
+type Drips_StreamReceiverSeen {
+  id: ID!
+  receiversHash: String!
+  accountId: BigInt!
+  config: BigInt!
+}
+
+type Drips_StreamsSet {
+  id: ID!
+  accountId: BigInt!
+  erc20: String!
+  receiversHash: String!
+  streamsHistoryHash: String!
+  balance: BigInt!
+  maxEnd: BigInt!
+}
+
+type Drips_Unpaused {
+  id: ID!
+  pauser: String!
+}
+
+type Drips_Upgraded {
+  id: ID!
+  implementation: String!
+}
+
+type Drips_Withdrawn {
+  id: ID!
+  erc20: String!
+  receiver: String!
+  amt: BigInt!
+}
+
