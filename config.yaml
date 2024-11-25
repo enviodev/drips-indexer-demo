@@ -1,33 +1,47 @@
 # yaml-language-server: $schema=./node_modules/envio/evm.schema.json
 name: drips
+contracts:
+  - name: Drips
+    handler: src/EventHandlers.ts
+    events:
+      - event: AccountMetadataEmitted(uint256 indexed accountId, bytes32 indexed key, bytes value)
+      - event: AdminChanged(address previousAdmin, address newAdmin)
+      - event: BeaconUpgraded(address indexed beacon)
+      - event: Collectable(uint256 indexed accountId, address indexed erc20, uint128 amt)
+      - event: Collected(uint256 indexed accountId, address indexed erc20, uint128 collected)
+      - event: DriverAddressUpdated(uint32 indexed driverId, address indexed oldDriverAddr, address indexed newDriverAddr)
+      - event: DriverRegistered(uint32 indexed driverId, address indexed driverAddr)
+      - event: Given(uint256 indexed accountId, uint256 indexed receiver, address indexed erc20, uint128 amt)
+      - event: NewAdminProposed(address indexed currentAdmin, address indexed newAdmin)
+      - event: Paused(address indexed pauser)
+      - event: PauserGranted(address indexed pauser, address indexed admin)
+      - event: PauserRevoked(address indexed pauser, address indexed admin)
+      - event: ReceivedStreams(uint256 indexed accountId, address indexed erc20, uint128 amt, uint32 receivableCycles)
+      - event: Split(uint256 indexed accountId, uint256 indexed receiver, address indexed erc20, uint128 amt)
+      - event: SplitsReceiverSeen(bytes32 indexed receiversHash, uint256 indexed accountId, uint32 weight)
+      - event: SplitsSet(uint256 indexed accountId, bytes32 indexed receiversHash)
+      - event: SqueezedStreams(uint256 indexed accountId, address indexed erc20, uint256 indexed senderId, uint128 amt, bytes32[] streamsHistoryHashes)
+      - event: StreamReceiverSeen(bytes32 indexed receiversHash, uint256 indexed accountId, uint256 config)
+      - event: StreamsSet(uint256 indexed accountId, address indexed erc20, bytes32 indexed receiversHash, bytes32 streamsHistoryHash, uint128 balance, uint32 maxEnd)
+      - event: Unpaused(address indexed pauser)
+      - event: Upgraded(address indexed implementation)
+      - event: Withdrawn(address indexed erc20, address indexed receiver, uint256 amt)
 networks:
   - id: 1
-    start_block: 0
+    start_block: 0 # when syncing from hypersync start block doesn't really matter as it's fast in finding the first event
     contracts:
       - name: Drips
         address:
           - 0xd0Dd053392db676D57317CD4fe96Fc2cCf42D0b4
-        handler: src/EventHandlers.ts
-        events:
-          - event: AccountMetadataEmitted(uint256 indexed accountId, bytes32 indexed key, bytes value)
-          - event: AdminChanged(address previousAdmin, address newAdmin)
-          - event: BeaconUpgraded(address indexed beacon)
-          - event: Collectable(uint256 indexed accountId, address indexed erc20, uint128 amt)
-          - event: Collected(uint256 indexed accountId, address indexed erc20, uint128 collected)
-          - event: DriverAddressUpdated(uint32 indexed driverId, address indexed oldDriverAddr, address indexed newDriverAddr)
-          - event: DriverRegistered(uint32 indexed driverId, address indexed driverAddr)
-          - event: Given(uint256 indexed accountId, uint256 indexed receiver, address indexed erc20, uint128 amt)
-          - event: NewAdminProposed(address indexed currentAdmin, address indexed newAdmin)
-          - event: Paused(address indexed pauser)
-          - event: PauserGranted(address indexed pauser, address indexed admin)
-          - event: PauserRevoked(address indexed pauser, address indexed admin)
-          - event: ReceivedStreams(uint256 indexed accountId, address indexed erc20, uint128 amt, uint32 receivableCycles)
-          - event: Split(uint256 indexed accountId, uint256 indexed receiver, address indexed erc20, uint128 amt)
-          - event: SplitsReceiverSeen(bytes32 indexed receiversHash, uint256 indexed accountId, uint32 weight)
-          - event: SplitsSet(uint256 indexed accountId, bytes32 indexed receiversHash)
-          - event: SqueezedStreams(uint256 indexed accountId, address indexed erc20, uint256 indexed senderId, uint128 amt, bytes32[] streamsHistoryHashes)
-          - event: StreamReceiverSeen(bytes32 indexed receiversHash, uint256 indexed accountId, uint256 config)
-          - event: StreamsSet(uint256 indexed accountId, address indexed erc20, bytes32 indexed receiversHash, bytes32 streamsHistoryHash, uint128 balance, uint32 maxEnd)
-          - event: Unpaused(address indexed pauser)
-          - event: Upgraded(address indexed implementation)
-          - event: Withdrawn(address indexed erc20, address indexed receiver, uint256 amt)
+  - id: 314 # filecoin
+    start_block: 4473075
+    # start_block: 4342170 # actual start block, but the free rpc's limit to 24 hours
+    rpc_config:
+      # url: https://filecoin.chainup.net/rpc/v1
+      # url: https://api.node.glif.io
+      url: https://rpc.ankr.com/filecoin
+      initial_block_interval: 1000
+    contracts:
+      - name: Drips
+        address:
+          - 0xd320F59F109c618b19707ea5C5F068020eA333B3
