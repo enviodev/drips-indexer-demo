@@ -1,8 +1,5 @@
 import assert from "assert";
-import { 
-  TestHelpers,
-  Drips_AccountMetadataEmitted
-} from "generated";
+import { TestHelpers, Drips_AccountMetadataEmitted } from "envio";
 const { MockDb, Drips } = TestHelpers;
 
 describe("Drips contract AccountMetadataEmitted event tests", () => {
